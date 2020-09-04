@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Quiz;
+use App\Answer;
 
 class QuestionController extends Controller
 {
@@ -13,11 +14,10 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Quiz $quiz)
     {
-        //
-        $data = Question::all();
-        return view('admin.onboarding.onboardingQuestion', compact('data'));
+        $quiz->load('question.answer');
+        return view('admin.onboarding.onboardingQuestion', compact('quiz'));
     }
 
     /**
@@ -42,12 +42,12 @@ class QuestionController extends Controller
             'questionQuiz.questionQuiz' => 'required',
             'answers.*.answer' => 'required'
         ]);
-        // $data = new Question;
-        // $data['quiz_id'] = quiz()->id;
         
-        // $data->questionQuiz = $request->questionQuiz;
-        // $data->save();
-        // return redirect('/onboarding/question');
+        $question = $quiz->question()->create( $data['questionQuiz']);
+        $question->answer()->createMany($data['answers']);
+        dd('$question');
+        return redirect('/onboarding/question');
+       
     }
 
     /**

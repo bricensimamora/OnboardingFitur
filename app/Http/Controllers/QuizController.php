@@ -45,7 +45,6 @@ class QuizController extends Controller
         ]);
         $data = new Quiz;
         $data['user_id'] = auth()->user()->id;
-        
         $data->title = $request->title;
         $data->description = $request->description;
         $data->save();

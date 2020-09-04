@@ -17,7 +17,7 @@
         <td>{{$data->title}}</td>
         <td>{{$data->description}}</td>
         <td> <a href = "/onboarding/quizDetail/{{$data->id}}"> Lihat Quiz </a> </td>   
-        <td> <a href = "/onboarding/{{$data->id}}/createQuestion"> Buat Pertanyaan </a> </td>
+        <td> <a href = "/onboarding/{{$data->id}}/question"> Buat Pertanyaan </a> </td>
     </tr>
     @endforeach
     </tbody>

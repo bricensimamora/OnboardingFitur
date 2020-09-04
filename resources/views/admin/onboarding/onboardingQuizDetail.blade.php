@@ -12,7 +12,7 @@
                         <div class="container my-3">
                             <a class="btn btn-primary" href="/onboarding/editQuiz/{{ $data->id }}">Edit</a>
                             <a class="btn btn-danger" href="/onboarding/deleteQuiz/{{ $data->id }}">HAPUS</a>
-                            <a class="btn btn-warning" href= "/onboarding/quiz/{{$data->id}}/createQuestion">Buat Pertanyaan</a>
+                            <a class="btn btn-warning" href= "/onboarding/question">Buat Pertanyaan</a>
                         </div>               
                     </div>
                 </div>
