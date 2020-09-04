@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h6 class="container my-3">{{$quiz->title}}</h6>
-            <form action="#" method="POST">
+            <form action="/onboarding/{{$quiz->id}}-{{Str::slug($quiz->title)}}" method="POST">
                 @csrf
                 @foreach($quiz->question as $key=>$question)
                 <div class="card my-3">
@@ -15,17 +15,23 @@
                             @foreach($question->answer as $answer)
                             <label for="answer{{$answer->id}}">
                                 <li class="list-group-item">
-                                    <input type="radio" name="#" id="answer{{$answer->id}}">
+                                    <input type="radio" name="responses[{{$key}}][answer_id]" id="answer{{$answer->id}}" value="{{$answer->id}}">
                                     {{$answer->answer}}
+                                    <input type="hidden" name="responses[{{$key}}][question_id]"  value="{{$question->id}}">
                                 </li>
                             </label>
                             @endforeach
-                        </ul>           
+                        </ul>
+                        @error('responses.' . $key . '.answer_id')
+                            <small class="text-danger">{{$message}}</small>
+                        @enderror          
                     </div>
                 </div>
                 @endforeach
-                <a class="btn btn-warning" href="#">Selesai</a>
-            </div>
+                <div class="form-group"> 
+                    <input class="btn btn-warning my-2" type="submit" value="Submit">
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -12,6 +12,23 @@ class QuizController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function startQuiz(Quiz $quiz, $slug)
+    {
+        $quiz->load('question.answer');
+        return view('admin.onboarding.onboardingstartQuiz', compact('quiz'));
+
+    }
+    public function storeResultQuiz(Quiz $quiz)
+    {
+        $answer = request()->validate([
+            'responses.*.answer_id' => 'required',
+            'responses.*.question_id' => 'required',
+        ]);
+        dd(request()->all());
+        
+
+    }
+ 
     public function index()
     {
         //
@@ -62,13 +79,6 @@ class QuizController extends Controller
         //
         $quiz = Quiz::find($id);
         return view('admin.onboarding.onboardingQuizDetail', compact('quiz'));
-
-    }
-
-    public function startQuiz(Quiz $quiz, $slug)
-    {
-        $quiz->load('question.answer');
-        return view('admin.onboarding.onboardingstartQuiz', compact('quiz'));
 
     }
 
