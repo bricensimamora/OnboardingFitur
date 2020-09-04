@@ -45,7 +45,7 @@ class QuestionController extends Controller
         
         $question = $quiz->question()->create( $data['questionQuiz']);
         $question->answer()->createMany($data['answers']);
-        return redirect('/onboarding/question');
+        return redirect('/onboarding/quiz');
        
     }
 
@@ -71,9 +71,6 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
-        $data = Question::find($id);
-        return view('admin.onboarding.editOnboardingQuestion', compact('data'));
     }
 
     /**
@@ -85,10 +82,6 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Question::find($id);
-        $data->questionQuiz = $request->questionQuiz;
-        $data->save();
-        return redirect ('/onboarding/question');
     }
 
     /**

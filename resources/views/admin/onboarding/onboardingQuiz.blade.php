@@ -11,13 +11,15 @@
     <th>Deskripsi</th>
     <th>Action</th>
     <th></th>
-    @foreach($data as $i=>$data)
+    <th></th>
+    @foreach($quiz as $i=>$quiz)
     <tr>
         <td>{{++$i}}</td>
-        <td>{{$data->title}}</td>
-        <td>{{$data->description}}</td>
-        <td> <a href = "/onboarding/quizDetail/{{$data->id}}"> Lihat Quiz </a> </td>   
-        <td> <a href = "/onboarding/{{$data->id}}/question"> Buat Pertanyaan </a> </td>
+        <td>{{$quiz->title}}</td>
+        <td>{{$quiz->description}}</td>
+        <td> <a href = "/onboarding/quizDetail/{{$quiz->id}}"> Lihat Quiz </a> </td>   
+        <td> <a href = "/onboarding/{{$quiz->id}}/question"> Buat Pertanyaan </a> </td>
+        <td> <a href = "/onboarding/{{$quiz->id}}-{{$quiz->title}}"> Mulai Quiz</a> </td>
     </tr>
     @endforeach
     </tbody>

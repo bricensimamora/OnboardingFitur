@@ -46,3 +46,5 @@ Route::get('/onboarding/editQuestion/{id}', 'QuestionController@edit');
 Route::post('/onboarding/updateQuestion/{id}', 'QuestionController@update');
 Route::get('/onboarding/deleteQuestion/{id}', 'QuestionController@destroy');
 
+Route::get('/onboarding/{quiz}-{slug}', 'QuizController@startQuiz');
+

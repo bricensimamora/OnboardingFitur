@@ -7,18 +7,18 @@
             <div class="card">
                 <div class="card-header">Detail Quiz </div>
                     <div class="card-body">
-                    <form action="/onboarding/updateQuiz/{{$data->id}}" method= "POST">
+                    <form action="/onboarding/updateQuiz/{{$quiz->id}}" method= "POST">
                         @csrf
                         <div class="form-group"> 
                             <label for="title">Judul Quiz</label>
-                            <input class="form-control my-2" name="title" type="text" placeholder="Judul" id="title" value = "{{$data->title}}">
+                            <input class="form-control my-2" name="title" type="text" placeholder="Judul" id="title" value = "{{$quiz->title}}">
                         </div>
                         @error('title')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
                         <div class="form-group"> 
                             <label for="description">Deskripsi Quiz</label>
-                            <input class="form-control my-2" name="description" type="text" placeholder="Deskripsi Quiz" id="description" value = "{{$data->description}}">
+                            <input class="form-control my-2" name="description" type="text" placeholder="Deskripsi Quiz" id="description" value = "{{$quiz->description}}">
                         </div>
                         @error('description')
                             <small class="text-danger">{{$message}}</small>

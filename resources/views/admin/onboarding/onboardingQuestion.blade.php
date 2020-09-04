@@ -10,9 +10,9 @@
                     <a class="btn btn-info" href="/onboarding/{{$quiz->id}}/createQuestion">Tambah Pertanyaan</a>       
                 </div>
             </div>
-            @foreach($quiz->question as $question)
+            @foreach($quiz->question as $key=>$question)
             <div class="card">
-                <div class="card-header"> {{$question->questionQuiz}} </div>
+                <div class="card-header"><strong>{{$key + 1}}</strong> {{$question->questionQuiz}} </div>
                 <div class="card-body">
                     <ul class="list-group">
                         @foreach($question->answer as $answer)

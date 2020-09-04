@@ -15,8 +15,8 @@ class QuizController extends Controller
     public function index()
     {
         //
-        $data = Quiz::all();
-        return view('admin.onboarding.onboardingQuiz', compact('data'));
+        $quiz = Quiz::all();
+        return view('admin.onboarding.onboardingQuiz', compact('quiz'));
     }
 
     /**
@@ -43,11 +43,11 @@ class QuizController extends Controller
             'title' => 'required',
             'description' => 'required',
         ]);
-        $data = new Quiz;
-        $data['user_id'] = auth()->user()->id;
-        $data->title = $request->title;
-        $data->description = $request->description;
-        $data->save();
+        $quiz = new Quiz;
+        $quiz['user_id'] = auth()->user()->id;
+        $quiz->title = $request->title;
+        $quiz->description = $request->description;
+        $quiz->save();
         return redirect('/onboarding/quiz');
     }
 
@@ -60,8 +60,15 @@ class QuizController extends Controller
     public function show($id)
     {
         //
-        $data = Quiz::find($id);
-        return view('admin.onboarding.onboardingQuizDetail', compact('data'));
+        $quiz = Quiz::find($id);
+        return view('admin.onboarding.onboardingQuizDetail', compact('quiz'));
+
+    }
+
+    public function startQuiz(Quiz $quiz, $slug)
+    {
+        $quiz->load('question.answer');
+        return view('admin.onboarding.onboardingstartQuiz', compact('quiz'));
 
     }
 
@@ -74,8 +81,8 @@ class QuizController extends Controller
     public function edit($id)
     {
         //
-        $data = Quiz::find($id);
-        return view('admin.onboarding.editOnboardingQuiz', compact('data'));
+        $quiz = Quiz::find($id);
+        return view('admin.onboarding.editOnboardingQuiz', compact('quiz'));
     }
 
     /**
@@ -93,10 +100,10 @@ class QuizController extends Controller
             'description' => 'required',
         ]);
 
-        $data = Quiz::find($id);
-        $data->title = $request->title;
-        $data->description = $request->description;
-        $data->save();
+        $quiz = Quiz::find($id);
+        $quiz->title = $request->title;
+        $quiz->description = $request->description;
+        $quiz->save();
         return redirect ('/onboarding/quiz');
     }
 
@@ -109,8 +116,10 @@ class QuizController extends Controller
     public function destroy($id)
     {
         //
-        $data = Quiz::find($id);
-        $data->delete();
+        $quiz = Quiz::find($id);
+        $quiz->delete();
         return redirect('/onboarding/quiz');
     }
+
+   
 }
