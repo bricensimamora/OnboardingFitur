@@ -45,7 +45,6 @@ class QuestionController extends Controller
         
         $question = $quiz->question()->create( $data['questionQuiz']);
         $question->answer()->createMany($data['answers']);
-        dd('$question');
         return redirect('/onboarding/question');
        
     }
@@ -103,6 +102,6 @@ class QuestionController extends Controller
         //
         $data = Question::find($id);
         $data->delete();
-        return redirect('/onboarding/question');
+        return redirect('/onboarding/quiz');
     }
 }

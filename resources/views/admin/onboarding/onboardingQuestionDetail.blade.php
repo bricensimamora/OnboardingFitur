@@ -7,11 +7,10 @@
             <div class="card">
                 <div class="card-header">{{$data->title}}</div>
                     <div class="card-body">
-                        <a href="/onboarding/quiz/{{$data->id}}/question/create"> </a>
+                        <a href="/onboarding/question/{{$data->id}}"> </a>
                         <div class="container my-3">
-                            <a class="btn btn-primary" href="/onboarding/editQuiz/{{ $data->id }}">Edit</a>
-                            <a class="btn btn-danger" href="/onboarding/deleteQuiz/{{ $data->id }}">HAPUS</a>
-                            <a class="btn btn-warning" href="/onboarding/question/{{ $data->id }}">Selesaikan</a>
+                            <a class="btn btn-primary" href="/onboarding/editQuestion/{{ $data->id }}">Edit</a>
+                            <a class="btn btn-danger" href="/onboarding/deleteQuestion/{{ $data->id }}">HAPUS</a>
                         </div>               
                     </div>
                 </div>

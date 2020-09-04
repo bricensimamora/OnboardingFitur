@@ -12,7 +12,7 @@
             </div>
             @foreach($quiz->question as $question)
             <div class="card">
-                <div class="card-header"> {{$question->question}} </div>
+                <div class="card-header"> {{$question->questionQuiz}} </div>
                 <div class="card-body">
                     <ul class="list-group">
                         @foreach($question->answer as $answer)
@@ -20,6 +20,10 @@
                         @endforeach
                     </ul>
                 </div>
+                <div class="container my-3">
+                    <a class="btn btn-primary" href="/onboarding/editQuestion/{{ $question->id }}">Edit</a>
+                    <a class="btn btn-danger" href="/onboarding/deleteQuestion/{{ $question->id }}">HAPUS</a>
+                </div>  
             </div>
             @endforeach
         </div>
