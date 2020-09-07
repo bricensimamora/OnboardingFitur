@@ -3,21 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Quiz;
 
-class QuizController extends Controller
+use App\Quiz;
+use App\UserQuizzesResponses;
+
+class UserQuizController extends Controller
 {
+    public function startQuiz(Quiz $quiz, $slug)
+    {
+        $quiz->load('question.answer');
+        return view('admin.onboarding.onboardingstartQuiz', compact('quiz'));
+
+    }
+    public function storeResultQuiz(Quiz $quiz)
+    {
+        $data = request()->validate([
+            'responses.*.answer_id' => 'required',
+            'responses.*.question_id' => 'required',
+            'userQuizzes.nama' => 'required',
+            'userQuizzes.email' => 'required|email',
+        ]);
+
+
+        $userQuizzes = $quiz->userQuizzes()->create($data['userQuizzes']);
+        $userQuizzes->responses()->createMany($data['responses']);
+
+        return view('admin.onboarding.onboardingQuizReport');
+
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
- 
     public function index()
     {
         //
-        $quiz = Quiz::all();
-        return view('admin.onboarding.onboardingQuiz', compact('quiz'));
     }
 
     /**
@@ -28,7 +49,6 @@ class QuizController extends Controller
     public function create()
     {
         //
-        return view('admin.onboarding.createOnboardingQuiz');
     }
 
     /**
@@ -39,17 +59,7 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $validateData = request()->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
-        $quiz = new Quiz;
-        $quiz['user_id'] = auth()->user()->id;
-        $quiz->title = $request->title;
-        $quiz->description = $request->description;
-        $quiz->save();
-        return redirect('/onboarding/quiz');
+        //
     }
 
     /**
@@ -61,9 +71,6 @@ class QuizController extends Controller
     public function show($id)
     {
         //
-        $quiz = Quiz::find($id);
-        return view('admin.onboarding.onboardingQuizDetail', compact('quiz'));
-
     }
 
     /**
@@ -75,8 +82,6 @@ class QuizController extends Controller
     public function edit($id)
     {
         //
-        $quiz = Quiz::find($id);
-        return view('admin.onboarding.editOnboardingQuiz', compact('quiz'));
     }
 
     /**
@@ -88,17 +93,7 @@ class QuizController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $vallidatedata = request()->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
-
-        $quiz = Quiz::find($id);
-        $quiz->title = $request->title;
-        $quiz->description = $request->description;
-        $quiz->save();
-        return redirect ('/onboarding/quiz');
+        //
     }
 
     /**
@@ -110,10 +105,5 @@ class QuizController extends Controller
     public function destroy($id)
     {
         //
-        $quiz = Quiz::find($id);
-        $quiz->delete();
-        return redirect('/onboarding/quiz');
     }
-
-   
 }

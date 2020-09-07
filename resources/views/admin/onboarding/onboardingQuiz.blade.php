@@ -19,7 +19,7 @@
         <td>{{$quiz->description}}</td>
         <td> <a href = "/onboarding/quizDetail/{{$quiz->id}}"> Lihat Quiz </a> </td>   
         <td> <a href = "/onboarding/{{$quiz->id}}/question"> Buat Pertanyaan </a> </td>
-        <td> <a href = "/onboarding/{{$quiz->id}}-{{$quiz->title}}"> Mulai Quiz</a> </td>
+        <td> <a href = "/onboarding/{{$quiz->id}}-{{Str::slug($quiz->title)}}"> Mulai Quiz</a> </td>
     </tr>
     @endforeach
     </tbody>

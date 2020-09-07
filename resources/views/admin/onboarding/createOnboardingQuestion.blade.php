@@ -58,7 +58,11 @@
 
                             <div class="form-group"> 
                                 <input class="btn btn-primary my-2" type="submit" value="Submit">
-                                <a class="btn btn-danger" href="/onboarding/quiz">Cancel</a>
+                                @if (session('status'))
+                                    <div class="alert alert-success">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
                             </div>
                         </form>
                     </div>
